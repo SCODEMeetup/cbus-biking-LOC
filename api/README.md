@@ -1,4 +1,4 @@
-### Cbus Biking Locations API
+# Cbus Biking Locations API
 
 API that exposes reports from cyclists including location and description of the incident
 
@@ -24,21 +24,21 @@ bundle install
 
 2. To create the development database on your MySQL server enter:
 
-rake db:create
+   rake db:create
 
-This creates the database from /cbus-biking-LOC/api/config/database.yml
+   This creates the database from /cbus-biking-LOC/api/config/database.yml
 
 3. To create the reports table in your development database enter:
 
-rake db:schema:load
+   rake db:schema:load
 
-This loads the schema from /cbus-biking-LOC/api/db/schema.rb
+   This loads the schema from /cbus-biking-LOC/api/db/schema.rb
 
 4. To seed the reports table with some sample data enter:
 
-rake db:seed
+   rake db:seed
 
-This loads seed data from /cbus-biking-LOC/api/db/seeds.rb
+   This loads seed data from /cbus-biking-LOC/api/db/seeds.rb
 
 ## Start the API application server
 
@@ -48,33 +48,33 @@ This will start the application server on your localhost at port 3000
 
 ## Using the API
 
-1.  POST a report
+1. POST a report
 
-http://localhost:3000/api/reports/
+   http://localhost:3000/api/reports/
 
-Example JSON body
+   Example JSON body
 
-{
+   {
       "lat": "41.333",
       "long": "-80.231",
       "reason": "crash"
-}
+   }
 
 2. GET a report by ID
 
-http://localhost:3000/api/reports/1
+   http://localhost:3000/api/reports/1
 
-Example Response:
+   Example Response:
 
-{
-    "id": 1,
-    "lat": 39.9846,
-    "long": -82.9192,
-    "reason": "crash",
-    "created_at": "2020-08-05T16:12:38.892Z",
-    "updated_at": "2020-08-05T16:12:38.892Z"
-}
+   {
+     "id": 1,
+     "lat": 39.9846,
+     "long": -82.9192,
+     "reason": "crash",
+     "created_at": "2020-08-05T16:12:38.892Z",
+     "updated_at": "2020-08-05T16:12:38.892Z"
+   }
 
-3.  GET all reports
+3. GET all reports
 
-http://localhost:3000/api/reports
+   http://localhost:3000/api/reports
