@@ -53,19 +53,20 @@ This will start the application server on your localhost at port 3000
    http://localhost:3000/api/reports/
 
    Example JSON body
-
+<pre>
    {
       "lat": "41.333",
       "long": "-80.231",
       "reason": "crash"
    }
-
+</pre>
 2. GET a report by ID
 
    http://localhost:3000/api/reports/1
 
    Example Response:
 
+<pre>
    {
      "id": 1,
      "lat": 39.9846,
@@ -74,6 +75,7 @@ This will start the application server on your localhost at port 3000
      "created_at": "2020-08-05T16:12:38.892Z",
      "updated_at": "2020-08-05T16:12:38.892Z"
    }
+</pre>
 
 3. GET all reports
 
