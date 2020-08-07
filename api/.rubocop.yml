@@ -1,0 +1,11 @@
+Metrics/LineLength:
+  Max: 80 
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'test/**/*'
+    - 'bin/{rails,rake,bundle}'
+    - !ruby/regexp /old_and_unused\.rb$/
