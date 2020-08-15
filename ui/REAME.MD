@@ -7,6 +7,8 @@ Mobile app written using react-native that allows a user to enter information ab
 1. [NodeJS 12.8.3 and NPM 6.14.6](https://nodejs.org/en/download/)
 2. [Expo](https://expo.io/learn) Install globally via NPM: `%npm install expo-cli --global`
 
+Run `%npm install` to install dependencies.
+
 ## Running
 
 Run `%npm run web` to run the app on the Expo server. This should open a browser tab to http://localhost:19002 that contains a debugging interface, and also opens a web browser tab with the app display. You can also display the app interface on your mobile devide by downloading the Expo client app from the app store and scanning the QR code that is displayed in the debugging interface.
