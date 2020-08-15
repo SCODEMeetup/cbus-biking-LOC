@@ -1,0 +1,12 @@
+{
+  "name": "cbus-bike-safety",
+  "displayName": "cbus-bike-safety",
+  "expo": {
+    "name": "cbus-bike-safety",
+    "slug": "cbus-bike-safety",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
