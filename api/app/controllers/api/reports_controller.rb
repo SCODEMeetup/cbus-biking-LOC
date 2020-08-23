@@ -16,7 +16,6 @@ module Api
 
     # POST /reports
     def create
-      puts "params: #{report_params}"
       @report = Report.new(report_params)
       if @report.save
         render json: @report, status: :created,
@@ -28,6 +27,8 @@ module Api
 
     # DELETE reports/:id
     def destroy
+      return unless @report
+
       @report.destroy
     end
 
