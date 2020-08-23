@@ -10,7 +10,8 @@ jobs:
   test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
-    working-directory: api
+    env:
+      working-directory: api
 
     services:
       mysql:
