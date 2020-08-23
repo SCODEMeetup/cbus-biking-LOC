@@ -1,7 +1,7 @@
-Metrics/LineLength:
+Style/LineLength:
   Max: 80 
 
-Metrics/BlockLength:
+Style/BlockLength:
   Max: 50
 
 AllCops:
