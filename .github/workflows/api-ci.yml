@@ -67,7 +67,7 @@ jobs:
     name: Run Linter
     runs-on: ubuntu-latest
     env:
-      working-directory: pantry-finder-api
+      working-directory: api
 
     steps:
       - name: Checkout
