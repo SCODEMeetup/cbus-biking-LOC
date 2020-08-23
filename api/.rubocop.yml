@@ -1,7 +1,10 @@
-Style/LineLength:
+AllCops:
+  NewCops: enable
+
+Layout/LineLength:
   Max: 80 
 
-Style/BlockLength:
+Metrics/BlockLength:
   Max: 50
 
 AllCops:
