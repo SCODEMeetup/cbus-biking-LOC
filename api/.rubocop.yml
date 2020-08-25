@@ -8,6 +8,7 @@ AllCops:
     - !ruby/regexp /old_and_unused\.rb$/
     - 'spec/spec_helper.rb'
     - 'spec/rails_helper.rb'
+    - vendor/bundle/**/*
 
 Layout/LineLength:
   Max: 80 
