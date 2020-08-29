@@ -4,6 +4,7 @@ module Api
   # Exposes the Report location and reason data
   class ReportsController < ApplicationController
     before_action :set_report, only: %i[show destroy]
+    before_action :set_headers
 
     # GET reports/:id
     def show
@@ -16,7 +17,6 @@ module Api
 
     # POST /reports
     def create
-      puts "params: #{report_params}"
       @report = Report.new(report_params)
       if @report.save
         render json: @report, status: :created,
@@ -28,11 +28,19 @@ module Api
 
     # DELETE reports/:id
     def destroy
+      return unless @report
+
       @report.destroy
     end
 
     def set_report
       @report = Report.find_by(id: params[:id])
+    end
+
+    def set_headers
+      headers['Access-Control-Allow-Origin'] = '*'
+      headers['Access-Control-Allow-Methods'] = 'POST, DELETE, GET'
+      headers['Access-Control-Request-Method'] = '*'
     end
 
     def report_params
