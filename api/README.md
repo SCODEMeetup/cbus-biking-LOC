@@ -42,9 +42,11 @@ bundle install
 
 ## Start the API application server
 
-rails s
+<pre>rails s</pre>
 
-This will start the application server on your localhost at port 3000
+This will start the application server on your localhost at port 3000. When running the ui, you may need to run on a different port:
+
+<pre>rails s -p {port}</pre>
 
 ## Using the API
 

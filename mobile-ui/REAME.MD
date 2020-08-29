@@ -1,4 +1,4 @@
-# Cbus Bike Safety UI
+# Cbus Bike Safety Mobile UI
 
 Mobile app written using react-native that allows a user to enter information about a bike route
 
