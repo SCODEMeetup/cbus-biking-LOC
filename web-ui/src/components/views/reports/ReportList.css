@@ -1,3 +1,8 @@
 .report-list {
-    list-style: none;
+    word-wrap: normal;
+}
+
+span {
+    width: 100%;
+    display: inline-block;
 }

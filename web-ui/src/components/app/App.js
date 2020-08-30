@@ -6,10 +6,8 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="app-container">
-        <div className="report-list-container">
-          <ReportList></ReportList>
-        </div>
+      <div className="report-list-container col-sm-3">
+        <ReportList></ReportList>
       </div>
     );
   }
