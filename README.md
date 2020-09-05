@@ -1,2 +1,2 @@
 # cbus-biking-LOC
-Building a realt time indicator of bike inicdents and level of comfort
+Building a real time indicator of bike inicdents and level of comfort
