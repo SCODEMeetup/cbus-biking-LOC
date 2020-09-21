@@ -8,8 +8,20 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Report.create([{ lat: 39.98460665, long: -82.91922267, reason: 'crash' },
-               { lat: 39.95800777, long: -82.97354855, reason: 'road conditions' },
-               { lat: 39.86176882, long: -83.17015774, reason: 'traffic' },
-               { lat: 39.920211, long: -82.832104, reason: 'construction' },
-               { lat: 39.9311316, long: -82.9646174, reason: 'safety' }])
+IncidentType.create([{ description: 'Near Miss'},
+                     { description: 'Crash'},
+                     { description: 'Roadway Obstruction'},
+                     { description: 'Hazardous Area'}])
+
+IncidentSeverity.create([{ description: 'No Apparent Injury'},
+                     { description: 'Possible Injury'},
+                     { description: 'Suspected Minor Injury'},
+                     { description: 'Suspected Serious Injury'},
+                     { description: 'Fatal Injury'}])
+
+Report.create([{ lat: 39.98460665, long: -82.91922267, incident_type_id: 1 },
+               { lat: 39.95800777, long: -82.97354855, incident_type_id: 2 },
+               { lat: 39.86176882, long: -83.17015774, incident_type_id: 3 },
+               { lat: 39.920211, long: -82.832104, incident_type_id: 4 } ])
+
+

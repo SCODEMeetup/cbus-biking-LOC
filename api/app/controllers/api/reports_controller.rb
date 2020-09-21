@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 module Api
-  # Exposes the Report location and reason data
+  # CRUD operations on the Reports endpoint
   class ReportsController < ApplicationController
     before_action :set_report, only: %i[show destroy]
     before_action :set_headers
 
     # GET reports/:id
     def show
-      render json: @report
+      # render json: @report
+      render json:
+        ActiveModelSerializers::SerializableResource.new(@report).as_json
     end
 
     def index
@@ -34,7 +36,7 @@ module Api
     end
 
     def set_report
-      @report = Report.find_by(id: params[:id])
+      @report = Report.find(params[:id])
     end
 
     def set_headers
@@ -44,7 +46,9 @@ module Api
     end
 
     def report_params
-      params.require(:report).permit(:lat, :long, :reason)
+      params.require(:report).permit(:lat, :long, :incident_type_id,
+                                     :incident_severity_id,
+                                     :incident_datetime, :incident_text)
     end
   end
 end

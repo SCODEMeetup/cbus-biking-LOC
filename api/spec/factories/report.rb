@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :report do
     lat { Faker::Address.latitude }
     long { Faker::Address.longitude }
-    reason { Faker::Quote.singular_siegler }
+    incident_datetime { Time.now.utc.iso8601 }
+    incident_text { Faker::Lorem.paragraph }
   end
 end
