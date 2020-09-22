@@ -65,7 +65,7 @@ This will start the application server on your localhost at port 3000. When runn
 
 ## Using the Reports API endpoint
 
-Important: The database must be seeded by running rake db:seed or rake db:setup before using the reports endoint.  This is because the reports endpoint depends on the seeded incident_reports and incident_severities files being populated with the correct values.  More on this below.
+**Important**: The database must be seeded by running rake db:seed or rake db:setup before using the reports endoint.  This is because the reports endpoint depends on incident_reports and incident_severities files being populated before a Report resource can be created.  More on this below.
 
 1. POST a report
 
@@ -83,13 +83,13 @@ Important: The database must be seeded by running rake db:seed or rake db:setup 
    }
 </pre>
 
-   required (lat:float, long:float, incident_datetime:string, incident_type_id:int, incident_severity_id:int)
+required params(lat:float, long:float, incident_datetime:string, incident_type_id:int, incident_severity_id:int)
 
-   Status codes: 
-   
-   201 Created, 422 Unprocessable Entity.
+Status codes: 
 
-   A 422 will include one or more validation error messages in the response body.  For example:
+201 Created, 422 Unprocessable Entity.
+
+A 422 will include one or more validation error messages in the response body.  For example:
 
    {
       {
@@ -99,15 +99,15 @@ Important: The database must be seeded by running rake db:seed or rake db:setup 
       }
    }
 
-   Notes:
+Notes:
 
-   incident_type_id and incident_severity_id are foreign keys in the incident_types and incident_severity tables, respectively.
+incident_type_id and incident_severity_id are foreign keys in the incident_types and incident_severity tables, respectively.
 
-   incident_datetime is an iso 8601 datetime string that is stored in UTC (indicated by the trailing Z)in the database.  If the incident_datetime indicates another timezone, e.g., "2020-09-19T21:44:42.-04:00" (ET DST), it will be converted to UTC by the server to "2020-09-20T01:44:42.000Z". 
-   
-   The minimum form of a valid iso 8601 datetime is YYYY-MM-DD which fills in hours, minutes and seconds with zeros on the server, e.g, 2020-10-01T00:00:00.000Z.
-   
-   https://en.wikipedia.org/wiki/ISO_8601
+incident_datetime is an iso 8601 datetime string that is stored in UTC (indicated by the trailing Z)in the database.  If the incident_datetime indicates another timezone, e.g., "2020-09-19T21:44:42.-04:00" (ET DST), it will be converted to UTC by the server to "2020-09-20T01:44:42.000Z". 
+
+The minimum form of a valid iso 8601 datetime is YYYY-MM-DD which fills in hours, minutes and seconds with zeros on the server, e.g, 2020-10-01T00:00:00.000Z.
+
+https://en.wikipedia.org/wiki/ISO_8601
 
 
 2. GET a report by ID
@@ -135,35 +135,35 @@ Important: The database must be seeded by running rake db:seed or rake db:setup 
    }
 </pre>
 
-   Status Codes:
+Status Codes:
 
-   200 OK, 404 Record Not Found 
-   
-   Notes:
+200 OK, 404 Record Not Found 
 
-   incident_type includes both the modal selection number (id) and the incident_type description, "Near Miss".  The incident_type endpoint allows for modifying the description without modifying the id (PATCH/PUT).
+Notes:
+
+incident_type includes both the modal selection number (id) and the incident_type description, "Near Miss".  The incident_type endpoint allows for modifying the description without modifying the id (PATCH/PUT).
 
 3. GET all reports
 
-   http://localhost:3000/api/reports
+http://localhost:3000/api/reports
 
-   Status Codes:
+Status Codes:
 
-   200 OK, 404 Record Not Found
+200 OK, 404 Record Not Found
 
 4. DELETE a report
   
    http://localhost:3000/api/reports/49
 
-   Status Codes:
+Status Codes:
 
-   204 No Content, 404 Record Not Found
+204 No Content, 404 Record Not Found
 
-   ## Using the incident_types and incident_severities endpoints
+## Using the incident_types and incident_severities endpoints
 
-   These endpoints support all of the HTTP request methods listed above in addition to the PUT/PATCH request methods.  Both of these methods result in the same results, updating the description field while retaining the row and its id.  This allows for keeping the id in line with the modal selections if desirable.
+These endpoints support all of the HTTP request methods listed above in addition to the PUT/PATCH request methods.  Both the PUT and PATCH methods result in the same results, updating the description field while retaining the row and its id.  This allows for keeping the id in line with the modal selections if desirable.
 
-   1. PUT/PATCH an incident_type (same applies for incident_severity)
+1. PUT/PATCH an incident_type (same applies for incident_severity)
 
    http://localhost:3000/api/incident_types/1
 
@@ -174,11 +174,13 @@ Important: The database must be seeded by running rake db:seed or rake db:setup 
    }
 </pre>
 
-   Status Codes:
+required params(description:string)
 
-   204 No Content, 404 Record Not Found, 422 Unprocessible Entity
+Status Codes:
 
-   A 422 will include one or more validation error messages in the response body.  Currently only applies to desctiption:
+204 No Content, 404 Record Not Found, 422 Unprocessible Entity
+
+A 422 will include one or more validation error messages in the response body.  Currently only applies to desctiption:
 <pre>
    {
     "description": [
@@ -187,23 +189,23 @@ Important: The database must be seeded by running rake db:seed or rake db:setup 
    }
 </pre>
 
-   2. DELETE an incident_type or incident_severity
+2. DELETE an incident_type or incident_severity
 
-   Deleting an incident_type or incident_severity that a report resource is dependent on will return an error.  For example:
+Deleting an incident_type or incident_severity that a report resource is dependent on will return an error.  For example:
 
    http://localhost:3000/api/incident_severities/2
 
    where an existing report has an incident_severity_type of 2 will return the following response body:
 
    {
-    "status": 409,
-    "error": "conflict",
-    "message": "Cannot delete record because of dependent reports"
+      "status": 409,
+      "error": "conflict",
+      "message": "Cannot delete record because of dependent reports"
    }
 
-   Status Codes:
+Status Codes:
 
-   204 No Content, 404 Record Not Found, 409 Conflict
+204 No Content, 404 Record Not Found, 409 Conflict
 
 
    
