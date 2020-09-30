@@ -34,3 +34,10 @@
 
 # Ignore /doc/*
 /doc/*
+
+# Ignore /coverage
+/coverage/*
+
+# Ignore .DS_Store
+../cbus-biking-LOC/.DS_Store
+.DS_Store

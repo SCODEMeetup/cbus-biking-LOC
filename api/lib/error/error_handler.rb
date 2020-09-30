@@ -10,7 +10,7 @@ module Error
           respond(:record_not_found, 404, capture_record_id(e))
         end
         rescue_from ActionController::ParameterMissing do |e|
-          respond(:record_not_found, 404, capture_record_id(e))
+          respond(:bad_request, 400, capture_record_id(e))
         end
         rescue_from ActiveRecord::DeleteRestrictionError do |e|
           respond(:conflict, 409, capture_record_id(e))

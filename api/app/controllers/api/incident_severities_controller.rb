@@ -40,7 +40,7 @@ module Api
       @incident_severity.update(incident_severity_params)
       return if @incident_severity.valid?
 
-      render json: @incident_type.errors, status: :unprocessable_entity
+      render json: @incident_severity.errors, status: :unprocessable_entity
     end
 
     def set_incident_severity
