@@ -66,7 +66,7 @@ This will start the application server on your localhost at port 3000. When runn
 
 Swagger documentation for all API endpoints is made available through the [rswag gem] (https://github.com/rswag/rswag).  This documentation is generated from Request rspec tests that include schema information, required parameters and expected status codes for all supported HTTP methods.  You can also invoke the methods directly from the Swagger UI.
 
-The generated documentation (Swagger UI) is available at http://localhost:3000/api-docs/index.html after the cloning and initialization steps.  If you wish to use a different host or port use the following steps:
+The generated documentation (Swagger UI) is available at http://localhost:3000/api-docs/index.html after the cloning and initialization steps.  If you wish to use a different host or port than the default:
 
 1. Locate and modify the default host in the spec/swagger_helper.rb file as shown below:
 
