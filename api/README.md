@@ -64,9 +64,9 @@ This will start the application server on your localhost at port 3000. When runn
 
 ## Swagger API documentation
 
-Swagger documentation for all API endpoints is made available through the [rswag gem] (https://github.com/rswag/rswag).  This documentation is generated from Request rspec tests that include schema information, required parameters and expected status codes for all supported HTTP methods.  You can also invoke the methods directly from the Swagger UI.
+Swagger documentation for all API endpoints is made available through the [rswag gem] (https://github.com/rswag/rswag).  This documentation is generated from Request rspec tests that include schema information, required parameters and expected status codes for all supported HTTP methods. These methods can be invoked directly from the Swagger UI.
 
-The generated documentation (Swagger UI) is available at http://localhost:3000/api-docs/index.html after the cloning and initialization steps.  If you wish to use a different host or port than the default:
+The generated documentation (Swagger UI) is available at http://localhost:3000/api-docs/index.html after the cloning and initialization steps.  To use a different host or port than the default:
 
 1. Locate and modify the default host in the spec/swagger_helper.rb file as shown below:
 
@@ -126,7 +126,7 @@ A 422 will include one or more validation error messages in the response body.  
 
 Notes:
 
-incident_type_id and incident_severity_id are foreign keys in the incident_types and incident_severity tables, respectively.
+incident_type_id and incident_severity_id are foreign keys to the incident_types and incident_severity table rows, respectively.
 
 incident_datetime is an iso 8601 datetime string that is stored in UTC (indicated by the trailing Z)in the database.  If the incident_datetime indicates another timezone, e.g., "2020-09-19T21:44:42.-04:00" (ET DST), it will be converted to UTC by the server to "2020-09-20T01:44:42.000Z". 
 
@@ -188,7 +188,7 @@ Status Codes:
 
 ## Using the incident_types and incident_severities endpoints
 
-These endpoints support all of the HTTP request methods listed above in addition to the PUT/PATCH request methods.  Both the PUT and PATCH methods result in the same results, updating the description field while retaining the row and its id.  This allows for keeping the id in line with the modal selections if desirable.
+These endpoints support all of the HTTP request methods listed above in addition to the PUT/PATCH request methods.  Both the PUT and PATCH methods result in the same results, updating the description field while retaining the row and its id.  This allows for keeping the id in line with the modal selections.
 
 1. PUT/PATCH an incident_type (same applies for incident_severity)
 
