@@ -5,11 +5,11 @@ import MapView from '../views/map/MapView';
 export default class App extends React.Component {
 
   state = {
-    height: window.innerHeight * 0.9
+    height: window.innerHeight
   }
 
   updateDimensions() {
-    this.setState({height: window.innerHeight * 0.9});
+    this.setState({height: window.innerHeight});
   }
 
   componentWillUnmount() {
