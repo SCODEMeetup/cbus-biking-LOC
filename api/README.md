@@ -8,9 +8,9 @@ Built an deployed using the Ruby on Rails framework.
 
 1. [Ruby 2.5.8/Rails](https://bitnami.com/stack/ruby/installer)
 2. [Bundler](https://bundler.io/)
-3. [MySQL 8.0.x](https://dev.mysql.com/doc/refman/8.0/en/installing.html)
+3. [PostgreSQL 13.0.x](https://www.postgresql.org/download/)
 
-Note: The api connects to the local development MySQL server using the root user id and no password.
+Note: The api connects to the local development PostgreSLQ server using the root user id and no password.
 
 ## API application Initialization
 
@@ -48,7 +48,7 @@ After cloning the repo, navigate to /cbus-biking-LOC/api and enter:
 
 <pre>rails s</pre>
 
-This will start the application server on your localhost at port 3000. When running the ui, you may need to run on a different port:
+This will start the application server on your localhost at port 4000. When running the ui, you may need to run on a different port:
 
 <pre>rails s -p {port}</pre>
 
@@ -66,14 +66,14 @@ This will start the application server on your localhost at port 3000. When runn
 
 Swagger documentation for all API endpoints is made available through the [rswag gem] (https://github.com/rswag/rswag).  This documentation is generated from Request rspec tests that include schema information, required parameters and expected status codes for all supported HTTP methods. These methods can be invoked directly from the Swagger UI.
 
-The generated documentation (Swagger UI) is available at http://localhost:3000/api-docs/index.html after the cloning and initialization steps.  To use a different host or port than the default:
+The generated documentation (Swagger UI) is available at http://localhost:4000/api-docs/index.html after the cloning and initialization steps.  To use a different host or port than the default:
 
 1. Locate and modify the default host in the spec/swagger_helper.rb file as shown below:
 
 <pre>
 variables: {
             defaultHost: {
-              default: 'localhost:4000'
+              default: 'localhost:5000'
             }
 </pre>
 
