@@ -14,19 +14,19 @@ jobs:
       working-directory: api
 
     services:
-      mysql:
-        image: mysql:8
+      postgres:
+        image: postgres:13
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          ALLOW_EMPTY_PASSWORD: yes
         ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+          - 5432:5432
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-      - name: Inspect MySQL (on failure)
+      - name: Inspect PostgreSQL (on failure)
         run: |
           echo "${{ toJson(job) }}"
-          docker logs "${{ job.services.mysql.id }}"
+          docker logs "${{ job.services.postges.id }}"
         if: failure()
       - name: Checkout
         uses: actions/checkout@v2
