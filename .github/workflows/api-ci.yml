@@ -62,7 +62,6 @@ jobs:
       - name: Upload Coverage Report
         run: |
           bash <(curl -s https://codecov.io/bash) -Z
-
   lint:
     name: Run Linter
     runs-on: ubuntu-latest
