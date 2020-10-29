@@ -10,7 +10,10 @@ Built an deployed using the Ruby on Rails framework.
 2. [Bundler](https://bundler.io/)
 3. [PostgreSQL 13.0.x](https://www.postgresql.org/download/)
 
-Note: The api connects to the local development PostgreSLQ server using the root user id and no password.
+Note: The api connects to the local development PostgreSQL server using these credentials:
+username: postgres 
+password: postgres
+
 
 ## API application Initialization
 
