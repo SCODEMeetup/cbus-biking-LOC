@@ -43,7 +43,7 @@ jobs:
             ${{ runner.os }}-bundler-
       - name: Setup
         env:
-          DB_HOST: 127.0.0.1
+          DB_HOST: localhost
           RAILS_ENV: test
         run: |
           gem install bundler
