@@ -19,8 +19,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: 
-  password: 
+  username: postgres
+  password: postgres
   database: cbus_biking_loc_development
   # socket: /tmp/mysql.sock
 
