@@ -49,7 +49,7 @@ After cloning the repo, navigate to /cbus-biking-LOC/api and enter:
 
 ## Start the API application server
 
-<pre>rails s</pre>
+<pre>rails s -p 4000</pre>
 
 This will start the application server on your localhost at port 4000. When running the ui, you may need to run on a different port:
 
