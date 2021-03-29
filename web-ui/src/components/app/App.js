@@ -22,7 +22,7 @@ export default class App extends React.Component {
 
   render() {
     const startPosition = [40, -83]; //TODO: Use the user's location
-    const zoom = 12;
+    const zoom = 11;
 
     return (
       <div id="map-container">
