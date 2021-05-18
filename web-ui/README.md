@@ -37,6 +37,16 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+## Accessing the Reports API
+
+The application accesses and updates the incident reports through the Reports API. If there is no REACT_APP_BIKING_REPORTS_URL enironment variable set, typically either in the API deployed environment or local .env file, the application will use http://localhost:4000/api/reports as the default API endpoint.
+
+For information on setting up a local Reports API see https://github.com/SCODEMeetup/cbus-biking-LOC-api/blob/master/README.md
+
+At the time of this writing there is a Reports API running at https://ride-aware.herokuapp.com/api/reports.  To access it in the application, add the following line in a .env file in the project directory.
+```
+REACT_APP_BIKING_REPORTS_URL=https://ride-aware.herokuapp.com/api/reports
+```
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
