@@ -1,17 +1,15 @@
 import React from 'react';
 import './MapView.css';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-require('dotenv').config();
+import { BIKING_REPORTS_URL } from '../../services/CbusBikingLocService.js';
+import { getReports } from '../../services/CbusBikingLocService.js';
 
-// URL for Reports API|
-const reportsUrl = process.env.REACT_APP_BIKING_REPORTS_URL || "http://localhost:4000/api/reports";
-
-var newMarkerId = 999; //placeholder for report id when user clicks a new location on map
+var newMarkerId = 9999; //placeholder for report id when user clicks a new location on map
 
 export default class MapView extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       reports: [],               // Stored JSON report objects 
       error_msg: "",             // error message displayed before map
@@ -19,37 +17,35 @@ export default class MapView extends React.Component {
     };
   }
 
-  callAPI() {
-    fetch(reportsUrl) 
-      .then(res => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res;
-        } else {
-          throw Error(res.statusText);
-        }
-      })
+  componentDidMount() {
+    getReports(BIKING_REPORTS_URL)
       .then(res => res.text()) 
       .then(res => this.setState({ apiResponse: res }))
       .then(res => this.storedMarkers())
       .catch((error) => {
         // Handle the error
-        this.setState({error_msg: `Failed to fetch reports from ${process.env.REACT_APP_BIKING_REPORTS_URL}.`}); 
+        this.setState({error_msg: `Failed to fetch reports from ${BIKING_REPORTS_URL}.`}); 
       });
-  }
-
-  componentDidMount() {
-    this.callAPI();
   } 
 
-  // addMarker creates a placeholder report marker 
-  // ToDo: add input form
   addMarker = (e) => {
+    this.handleFormLatChange(e);
+    this.handleFormLongChange(e);
     const {reports} = this.state
     ++newMarkerId;
     var report = this.addReport(e);
     reports.push(report);
     this.setState({reports})
   } 
+
+  handleFormLatChange(e) {
+    this.props.handleFormLatChange(e.latlng.lat);
+  }
+
+  handleFormLongChange(e) {
+    this.props.handleFormLongChange(e.latlng.lng);
+  }
+
 
   // creates placeholder report object
   addReport(e) {
@@ -65,7 +61,8 @@ export default class MapView extends React.Component {
       id: newMarkerId,
       incident_type,
       incident_severity,
-      incident_text: 'ToDo: add input form'
+      incident_datetime: 'undefined',
+      incident_text: 'undefined'
     }
     return(report);
   }
@@ -78,7 +75,6 @@ export default class MapView extends React.Component {
   render() {
     return (
       <div id="map">
-        <div>{this.state.error_msg}</div>
         <Map
           tap={false} //needed for Safari browser
           center={this.props.position}
@@ -121,6 +117,7 @@ export default class MapView extends React.Component {
           })
         }
         </Map>
+        <div style={{color: "red"}} >{this.state.error_msg}</div>
       </div>
     );
   }
