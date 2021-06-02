@@ -2,7 +2,8 @@ import React from 'react';
 import './FormView.css';
 import { BIKING_REPORTS_URL } from '../../services/CbusBikingLocService.js';
 import { postReport } from '../../services/CbusBikingLocService.js';
-import { incidentTypes, incidentSeverities, formMessages, datetimeInputTip } from './FormViewUserMessages';
+import { incidentTypes, incidentSeverities, formMessages, errorMessages } from './FormViewUserMessages';
+import { datetimeValue } from '../../lib/DateUtils.js'
 
 export default class FormView extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class FormView extends React.Component {
       prev_props_formLong: '',
       incident_type: incidentTypes.get(1),
       incident_severity: incidentSeverities.get(1),
-      incident_datetime: datetimeInputTip(),
+      incident_datetime: datetimeValue(),
       incident_text: '',
       input_status: '',
       input_color: '',
@@ -25,6 +26,7 @@ export default class FormView extends React.Component {
       form_tip_text_class: 'form-tip-text',
     };
     this.myChangeHandler = this.myChangeHandler.bind(this);
+    console.log(`this.state.incident_datetime: ${this.state.incident_datetime}`);
   }
 
   
@@ -41,7 +43,7 @@ export default class FormView extends React.Component {
         input_status: '',
         incident_type: incidentTypes.get(1),
         incident_severity: incidentSeverities.get(1),
-        incident_datetime: datetimeInputTip(),
+        incident_datetime: datetimeValue(),
         incident_text: '',
       };
     }
@@ -88,7 +90,6 @@ export default class FormView extends React.Component {
     this.setState({input_status: input_status});
   }
 
-
   createReport() {
     var report = {
       lat: this.state.lat,
@@ -130,15 +131,15 @@ export default class FormView extends React.Component {
   validateReport(report) {
     var errorFound = false;
     if(report.incident_datetime === "invalid datetime") {
-       this.setState({input_status: report.incident_datetime} );
+       this.setState({input_status: errorMessages.get(1)});
        errorFound = true;
     } 
     if(report.lat < -90 || report.lat > 90) {
-      this.setState({input_status: "latitude must be between -90 and 90"} );
+      this.setState({input_status: errorMessages.get(2)});
       errorFound = true;
     }
     if(report.long < -90 || report.long > 90) {
-      this.setState({input_status: "longitude must be between -180 and 180"} );
+      this.setState({input_status: errorMessages.get(3)});
       errorFound = true;
     }
     if(errorFound) {
@@ -152,8 +153,9 @@ export default class FormView extends React.Component {
 
   render() {
     return (
+      <div id="form">
       <form onSubmit={this.handleSubmit}>
-        <h1>Bike Safety Incident Report</h1>
+        <h5>Bike Safety Incident Report</h5>
         <div className={this.state.form_tip_text_class}>{this.state.form_tip_text}</div>
         <p/>
         <div>Latitude: *</div>
@@ -173,7 +175,7 @@ export default class FormView extends React.Component {
           onChange={this.myChangeHandler}
         />
         <p/>
-        <div>Select Incident Type *</div>
+        <div>Incident Type *</div>
         <select value={this.state.incident_type} onChange={this.myChangeHandler} name='incident_type'>
           <option value={incidentTypes.get(1)}>{incidentTypes.get(1)}</option>
           <option value={incidentTypes.get(2)}>{incidentTypes.get(2)}</option>
@@ -181,7 +183,7 @@ export default class FormView extends React.Component {
           <option value={incidentTypes.get(4)}>{incidentTypes.get(4)}</option>
         </select>
         <p/>
-        <div>Select Incident Severity *</div>
+        <div>Incident Severity *</div>
         <select value={this.state.incident_severity} onChange={this.myChangeHandler} name='incident_severity'>
           <option value={incidentSeverities.get(1)}>{incidentSeverities.get(1)}</option>
           <option value={incidentSeverities.get(2)}>{incidentSeverities.get(2)}</option>
@@ -194,12 +196,13 @@ export default class FormView extends React.Component {
         <input
           type='datetime-local'
           value={this.state.incident_datetime}
+          placeholder={this.state.incident_datetime}
           name='incident_datetime'
           onChange={this.myChangeHandler}
         />
         <p/>
         <div/>
-          Enter additional text description(optional):
+          Enter text description:
         <div/>
         <label>
           <textarea 
@@ -212,6 +215,7 @@ export default class FormView extends React.Component {
         <input type="submit" value="Submit" />
         <p style={{color: this.state.input_color}}> {this.state.input_status} </p>
       </form>
+      </div>
     );
   }
 }
