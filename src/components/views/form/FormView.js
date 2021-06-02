@@ -157,7 +157,6 @@ export default class FormView extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <h5>Bike Safety Incident Report</h5>
         <div className={this.state.form_tip_text_class}>{this.state.form_tip_text}</div>
-        <p/>
         <div>Latitude: *</div>
         <input
           className={this.state.input_text_class}
