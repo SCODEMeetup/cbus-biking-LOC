@@ -3,6 +3,7 @@ import './MapView.css';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { BIKING_REPORTS_URL } from '../../services/CbusBikingLocService.js';
 import { getReports } from '../../services/CbusBikingLocService.js';
+import { formatUtcDate } from '../../lib/DateUtils.js'
 
 var newMarkerId = 9999; //placeholder for report id when user clicks a new location on map
 
@@ -123,10 +124,5 @@ export default class MapView extends React.Component {
   }
 }
 
-function formatUtcDate(utc_string) {
-  var localDate = new Date(utc_string);
-  var secondString = localDate.toLocaleTimeString().substr(-6,6);
-  return localDate.toLocaleString().replace(secondString, secondString.substr(-3));
 
-}
 

@@ -1,5 +1,7 @@
 .app-container {
-    margin: 0;
+    margin: 2px;
+    height: 100%;
+    background-color: seashell;
     display: flex;
     flex-direction: row;
 }
@@ -7,16 +9,17 @@
 .report-list-container {
     padding: 0;
     height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow-y: scroll;
+    overflow-x: auto;
+    box-sizing: border-box;
 }
 
-#map-container {
-    width: 70%;
-    height: 90%;
+.map-container {
+   margin: 2px;
+   flex-basis: 60%;
 }
 
-#form-container {
-    width: 30%;
-    height: 90%;
+.form-container {
+    margin: 2px;
+    flex-basis: 40%;
 }

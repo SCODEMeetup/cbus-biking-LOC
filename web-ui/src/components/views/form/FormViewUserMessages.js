@@ -12,22 +12,12 @@ incidentSeverities.set(4, 'Suspected Serious Injury');
 incidentSeverities.set(5, 'Fatal Injury');
 
 export const formMessages = new Map();
-formMessages.set(1, 'Click on map to add incident location to form below');
-formMessages.set(2, 'Complete the form below with the selected location');
+formMessages.set(1, 'Click on map to add incident location');
+formMessages.set(2, 'Complete form with selected location');
 formMessages.set(3, 'Incident Report Created');
 formMessages.set(4, 'mm/dd/yyyy hh:mm am/pm');
 
-export function datetimeInputTip() {
-    try {
-      // test whether a new datetime-local input falls back to a text input or not
-      var test = document.createElement('input');
-
-      test.type = 'datetime-local';
-    } catch (e) {
-      console.log(e.description);
-    }
-    if (test.type === "text")
-      return(formMessages.get(4));
-    else
-       return('');
-  }
+export const errorMessages = new Map();
+errorMessages.set(1, 'invalid datetime: use format mm/dd/yyyy hh:mm am/pm');
+errorMessages.set(2, 'latitude must be between -90 and 90');
+errorMessages.set(3, 'longitude must be between -180 and 180');
