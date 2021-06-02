@@ -43,7 +43,7 @@ export default class App extends React.Component {
     const zoom = 11;
     return (
       <div className="app-container">
-        <div id="map-container">
+        <div className="map-container">
           <MapView
             height={this.state.height}
             width={this.state.width}
