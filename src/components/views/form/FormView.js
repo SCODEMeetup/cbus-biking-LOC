@@ -192,7 +192,7 @@ export default class FormView extends React.Component {
           <option value={incidentSeverities.get(5)}>{incidentSeverities.get(5)}</option>
         </select>
         <p/>
-        <div>Enter Date and Time of Incident: *</div>
+        <div>Date and Time of Incident: *</div>
         <input
           type='datetime-local'
           value={this.state.incident_datetime}
@@ -202,7 +202,7 @@ export default class FormView extends React.Component {
         />
         <p/>
         <div/>
-          Enter text description:
+          Text description:
         <div/>
         <label>
           <textarea 
