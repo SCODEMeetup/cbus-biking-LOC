@@ -3,6 +3,8 @@ import './FormView.css';
 import { BIKING_REPORTS_URL } from '../../services/CbusBikingLocService.js';
 import { postReport } from '../../services/CbusBikingLocService.js';
 import { incidentTypes, incidentSeverities, formMessages, errorMessages } from './FormViewUserMessages';
+import { CLICK_MAP, COMPLETE_FORM, SUBMIT_SUCCESS } from './FormViewUserMessages';
+import { validateReport } from './ReportValidation';
 import { datetimeValue } from '../../lib/DateUtils.js'
 
 export default class FormView extends React.Component {
@@ -21,14 +23,12 @@ export default class FormView extends React.Component {
       input_color: '',
       response_status: '',
       response_status_text: '',
-      form_tip_text: formMessages.get(1),
+      form_tip_text: formMessages.get(CLICK_MAP),
       input_text_class: 'input-text-plain-border',
       form_tip_text_class: 'form-tip-text',
     };
     this.myChangeHandler = this.myChangeHandler.bind(this);
-    console.log(`this.state.incident_datetime: ${this.state.incident_datetime}`);
   }
-
   
   static getDerivedStateFromProps(props, state) {
     if (props.formLat !== state.prev_props_formLat || 
@@ -39,7 +39,7 @@ export default class FormView extends React.Component {
         prev_props_formLat: props.formLat,
         prev_props_formLong: props.formLong,
         input_text_class: 'input-text-highlight-border',
-        form_tip_text: formMessages.get(2), 
+        form_tip_text: formMessages.get(COMPLETE_FORM), 
         input_status: '',
         incident_type: incidentTypes.get(1),
         incident_severity: incidentSeverities.get(1),
@@ -57,9 +57,10 @@ export default class FormView extends React.Component {
   }
 
   handleSubmit = (event) => {
-    var report = this.createReport();
+    let report = this.createReport();
     event.preventDefault();
-    if(this.validateReport(report)) {
+    let errorCode = validateReport(report);
+    if (!errorCode) {
       postReport(BIKING_REPORTS_URL, report)
         .then(response => {
           this.setState({response_status: response.status});
@@ -70,18 +71,21 @@ export default class FormView extends React.Component {
           return response.text();
         })
         .then(data => {
-          if(this.state.response_status !== 201)
+          if (this.state.response_status !== 201)
             throw Error(`${this.state.response_status_text} ${data}`);
         })
         .catch(error => {
           this.setSubmitMessage("red", `${error}` );
         });
     }
+    else
+      this.setSubmitMessage("red", errorMessages.get(errorCode));
   }
 
   restoreFormMsg() {
-    this.setSubmitMessage("green", formMessages.get(3));
-    this.setState({form_tip_text: formMessages.get(1)});
+    this.props.handleReportPostedChange(true);
+    this.setSubmitMessage("green", formMessages.get(SUBMIT_SUCCESS));
+    this.setState({form_tip_text: formMessages.get(CLICK_MAP)});
     this.setState({ input_text_class: 'input-text-plain-border'});
   }
 
@@ -124,30 +128,6 @@ export default class FormView extends React.Component {
     for (let [key, value] of incidentSeverities) {
       if(value === this.state.incident_severity)
         return(key);
-    }
-  }
-
-
-  validateReport(report) {
-    var errorFound = false;
-    if(report.incident_datetime === "invalid datetime") {
-       this.setState({input_status: errorMessages.get(1)});
-       errorFound = true;
-    } 
-    if(report.lat < -90 || report.lat > 90) {
-      this.setState({input_status: errorMessages.get(2)});
-      errorFound = true;
-    }
-    if(report.long < -90 || report.long > 90) {
-      this.setState({input_status: errorMessages.get(3)});
-      errorFound = true;
-    }
-    if(errorFound) {
-        this.setState({input_color: "red"});
-        return(false);
-    } else {
-        this.setState({input_color: "green"});
-        return(true);  
     }
   }
 

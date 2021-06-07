@@ -9,11 +9,13 @@ export default class App extends React.Component {
     super(props);
     this.handleFormLatChange = this.handleFormLatChange.bind(this);
     this.handleFormLongChange = this.handleFormLongChange.bind(this);
+    this.handleReportPostedChange = this.handleReportPostedChange.bind(this);
     this.state = {
       height: window.innerHeight * 0.9,
       width: window.innerWidth * 0.9,
       formLat: '',
       formLong: '',
+      reportPosted: false,
     }
   }
 
@@ -23,6 +25,10 @@ export default class App extends React.Component {
 
   handleFormLongChange(newFormLong) {
     this.setState({formLong: newFormLong});
+  }
+
+  handleReportPostedChange(newReportPosted) {
+    this.setState({reportPosted: newReportPosted});
   }
 
   updateDimensions() {
@@ -49,14 +55,17 @@ export default class App extends React.Component {
             width={this.state.width}
             position={startPosition}
             zoom={zoom}
+            reportPosted={this.state.reportPosted}
             handleFormLatChange={this.handleFormLatChange}
             handleFormLongChange={this.handleFormLongChange}
+            handleReportPostedChange={this.handleReportPostedChange}
           />
         </div>
         <div className="form-container">
           <FormView
             formLat={this.state.formLat}
             formLong={this.state.formLong}
+            handleReportPostedChange={this.handleReportPostedChange}
           />
         </div>
       </div>

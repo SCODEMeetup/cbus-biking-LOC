@@ -17,10 +17,11 @@
     "react-moment": "^0.9.7",
     "react-native": "^0.64.0",
     "react-scripts": "3.4.3",
+    "serve": "^11.3.2",
     "srw": "0.0.4",
     "swr": "^0.5.2"
   },
-  "scripts": {
+    "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",
     "build": "react-scripts build",

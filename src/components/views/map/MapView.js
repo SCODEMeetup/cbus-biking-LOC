@@ -19,6 +19,10 @@ export default class MapView extends React.Component {
   }
 
   componentDidMount() {
+    this.retrieveReports();
+  } 
+
+  retrieveReports() {
     getReports(BIKING_REPORTS_URL)
       .then(res => res.text()) 
       .then(res => this.setState({ apiResponse: res }))
@@ -74,6 +78,10 @@ export default class MapView extends React.Component {
   }
 
   render() {
+    if (this.props.reportPosted) {
+      this.retrieveReports();
+      this.props.handleReportPostedChange(false);
+    }
     return (
       <div id="map">
         <Map
