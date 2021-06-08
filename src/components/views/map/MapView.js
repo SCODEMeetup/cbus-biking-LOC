@@ -19,6 +19,17 @@ export default class MapView extends React.Component {
   }
 
   componentDidMount() {
+    this.retrieveReports();
+  }
+  
+  componentDidUpdate() {
+    if (this.props.reportPosted) {
+      this.retrieveReports();
+      this.props.handleReportPostedChange(false);
+    }
+  }
+
+  retrieveReports() {
     getReports(BIKING_REPORTS_URL)
       .then(res => res.text()) 
       .then(res => this.setState({ apiResponse: res }))

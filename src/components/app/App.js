@@ -9,11 +9,15 @@ export default class App extends React.Component {
     super(props);
     this.handleFormLatChange = this.handleFormLatChange.bind(this);
     this.handleFormLongChange = this.handleFormLongChange.bind(this);
+    this.handleReportPostedChange = this.handleReportPostedChange.bind(this);
     this.state = {
       height: window.innerHeight * 0.9,
       width: window.innerWidth * 0.9,
       formLat: '',
       formLong: '',
+      reportPosted: false,
+      startPosition: [40, -83], //TODO: Use the user's location
+      zoom: 11,
     }
   }
 
@@ -23,6 +27,10 @@ export default class App extends React.Component {
 
   handleFormLongChange(newFormLong) {
     this.setState({formLong: newFormLong});
+  }
+
+  handleReportPostedChange(newReportPosted) {
+    this.setState({reportPosted: newReportPosted});
   }
 
   updateDimensions() {
@@ -39,24 +47,25 @@ export default class App extends React.Component {
   }
 
   render() {
-    const startPosition = [40, -83]; //TODO: Use the user's location
-    const zoom = 11;
     return (
       <div className="app-container">
         <div className="map-container">
           <MapView
             height={this.state.height}
             width={this.state.width}
-            position={startPosition}
-            zoom={zoom}
+            position={this.state.startPosition}
+            zoom={this.state.zoom}
+            reportPosted={this.state.reportPosted}
             handleFormLatChange={this.handleFormLatChange}
             handleFormLongChange={this.handleFormLongChange}
+            handleReportPostedChange={this.handleReportPostedChange}
           />
         </div>
         <div className="form-container">
           <FormView
             formLat={this.state.formLat}
             formLong={this.state.formLong}
+            handleReportPostedChange={this.handleReportPostedChange}
           />
         </div>
       </div>
