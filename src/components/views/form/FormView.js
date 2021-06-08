@@ -131,6 +131,10 @@ export default class FormView extends React.Component {
     }
   }
 
+  refreshPage() {
+    window.location.reload();
+  }
+
   render() {
     return (
       <div id="form">
@@ -192,6 +196,12 @@ export default class FormView extends React.Component {
         </label>
         <p/>
         <input type="submit" value="Submit" />
+        {'\u00A0'}{'\u00A0'}
+        <input 
+          type="button" 
+          value="Refresh"
+          onClick={this.refreshPage}
+        />
         <p style={{color: this.state.input_color}}> {this.state.input_status} </p>
       </form>
       </div>
