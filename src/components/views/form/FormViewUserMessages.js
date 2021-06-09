@@ -20,12 +20,14 @@ formMessages.set(1, 'Click on map to add incident location');
 formMessages.set(2, 'Complete form with selected location');
 formMessages.set(3, 'Incident Report Created');
 
-export const LATITUDE_ERR = 2;
-export const LONGITUDE_ERR = 3;
-export const DATETIME_ERR = 1;
+export const LATITUDE_ERR = 1;
+export const LONGITUDE_ERR = 2;
+export const DATETIME_ERR = 3;
+export const DATETIME_IN_FUTURE_ERR = 4;
 
 export const errorMessages = new Map();
 
 errorMessages.set(LATITUDE_ERR, 'Latitude must be number between -90 and 90');
 errorMessages.set(LONGITUDE_ERR, 'Longitude must be number between -180 and 180');
 errorMessages.set(DATETIME_ERR, 'Invalid datetime: use format mm/dd/yyyy hh:mm am/pm');
+errorMessages.set(DATETIME_IN_FUTURE_ERR, 'Incident DateTime cannot be in future');

@@ -1,4 +1,4 @@
-import { DATETIME_ERR, LATITUDE_ERR, LONGITUDE_ERR } from './FormViewUserMessages';
+import { LATITUDE_ERR, LONGITUDE_ERR, DATETIME_ERR, DATETIME_IN_FUTURE_ERR } from './FormViewUserMessages';
 
 export function validateReport(report) {
     if(report.lat < -90 || report.lat > 90 || isNaN(report.lat) || report.lat === '')
@@ -7,5 +7,8 @@ export function validateReport(report) {
       return LONGITUDE_ERR;
     if(report.incident_datetime === "invalid datetime")
       return DATETIME_ERR;
+    if(report.incident_datetime === "datetime in future")
+      return DATETIME_IN_FUTURE_ERR;
     return 0;
   }
+
