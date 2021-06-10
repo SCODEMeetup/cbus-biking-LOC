@@ -108,11 +108,11 @@ export default class FormView extends React.Component {
 
   getUtcDateTime() {
     //convert datetime to UTC datetime string
-    var DateTime = new Date(this.state.incident_datetime);
-    if (DateTime.getTime() > new Date().getTime())
+    var dateTime = new Date(this.state.incident_datetime);
+    if (dateTime.getTime() > new Date().getTime())
       return 'datetime in future';
-    if (DateTime instanceof Date && isFinite(DateTime)) {
-      var isoDateTime = DateTime.toISOString();
+    if (dateTime instanceof Date && isFinite(dateTime)) {
+      var isoDateTime = dateTime.toISOString();
       return isoDateTime;
     }
     else
