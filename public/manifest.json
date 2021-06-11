@@ -4,8 +4,9 @@
   "icons": [
     {
       "src": "cbus-biking.png",
-      "sizes": "192X192",
-      "type": "image/png"
+      "sizes": "512X512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "start_url": ".",
