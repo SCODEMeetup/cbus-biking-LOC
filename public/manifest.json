@@ -6,7 +6,7 @@
       "src": "cbus-biking.png",
       "sizes": "512X512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
