@@ -1,11 +1,12 @@
 {
   "short_name": "Cbus Biking LOC",
-  "name": "Columbus Bicking Locations",
+  "name": "Columbus Biking Locations",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "cbus-biking.png",
+      "sizes": "512X512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
