@@ -54,8 +54,8 @@ export default class App extends React.Component {
 
     let options = {
       enableHighAccuracy: false,
-      timeout: 5000,
-      maximumAge: 60_000
+      timeout: 10_000,
+      maximumAge: 10_000
     };
     
     navigator.geolocation.watchPosition(success, error, options);
