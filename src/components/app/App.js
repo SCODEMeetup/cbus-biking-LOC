@@ -52,7 +52,7 @@ export default class App extends React.Component {
 
     let error = () => this.setState({startPosition: [40, -83]});
     
-    navigator.geolocation.getCurrentPosition(success, error);
+    navigator.geolocation.watchPosition(success, error);
   }
 
   render() {
