@@ -1,6 +1,6 @@
 import React from 'react';
 import './MapView.css';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup, CircleMarker } from 'react-leaflet';
 import { BIKING_REPORTS_URL } from '../../services/CbusBikingLocService.js';
 import { getReports } from '../../services/CbusBikingLocService.js';
 import { formatUtcDate } from '../../lib/DateUtils.js'
@@ -98,6 +98,14 @@ export default class MapView extends React.Component {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
+          <CircleMarker
+            center={this.props.position}
+            color="green"
+            fillColor="red"
+            radius={8}
+            fillOpacity={.6}
+            stroke={false}
+          ></CircleMarker>
           {this.state.reports.map(report => {
             return (
               <Marker 

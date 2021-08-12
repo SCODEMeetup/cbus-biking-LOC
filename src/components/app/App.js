@@ -2,9 +2,10 @@ import React from 'react';
 import './App.css';
 import MapView from '../views/map/MapView';
 import FormView from '../views/form/FormView';
+import Delayed from '../lib/Delayed';
 
 export default class App extends React.Component {
-
+  
   constructor(props) {
     super(props);
     this.handleFormLatChange = this.handleFormLatChange.bind(this);
@@ -16,7 +17,7 @@ export default class App extends React.Component {
       formLat: '',
       formLong: '',
       reportPosted: false,
-      startPosition: [40, -83], //TODO: Use the user's location
+      startPosition: [40, -83],
       zoom: 11,
     }
   }
@@ -39,16 +40,25 @@ export default class App extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this))
+    window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.updateDimensions.bind(this))
+    window.addEventListener("resize", this.updateDimensions.bind(this));
+
+    let success = position => {
+      this.setState( { startPosition: [position.coords.latitude, position.coords.longitude]} );
+    }
+
+    let error = () => this.setState({startPosition: [40, -83]});
+    
+    navigator.geolocation.getCurrentPosition(success, error);
   }
 
   render() {
     return (
       <div className="app-container">
+        <Delayed waitBeforeShow={3750}>
         <div className="map-container">
           <MapView
             height={this.state.height}
@@ -61,6 +71,7 @@ export default class App extends React.Component {
             handleReportPostedChange={this.handleReportPostedChange}
           />
         </div>
+        </Delayed>
         <div className="form-container">
           <FormView
             formLat={this.state.formLat}
