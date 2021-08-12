@@ -51,8 +51,14 @@ export default class App extends React.Component {
     }
 
     let error = () => this.setState({startPosition: [40, -83]});
+
+    let options = {
+      enableHighAccuracy: false,
+      timeout: 5000,
+      maximumAge: 60_000
+    };
     
-    navigator.geolocation.watchPosition(success, error);
+    navigator.geolocation.watchPosition(success, error, options);
   }
 
   render() {
