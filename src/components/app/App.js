@@ -17,8 +17,8 @@ export default class App extends React.Component {
       formLat: '',
       formLong: '',
       reportPosted: false,
-      startPosition: [40, -83],
-      zoom: 11,
+      startPosition: [],
+      zoom: 14,
     }
   }
 
