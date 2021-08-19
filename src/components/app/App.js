@@ -47,6 +47,7 @@ export default class App extends React.Component {
     window.addEventListener("resize", this.updateDimensions.bind(this));
 
     let success = position => {
+      console.log(`setting startPosition time is ${(new Date()).toUTCString()}`);
       this.setState( { startPosition: [position.coords.latitude, position.coords.longitude]} );
     }
 

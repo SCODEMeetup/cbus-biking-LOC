@@ -6,6 +6,7 @@ import { getReports } from '../../services/CbusBikingLocService.js';
 import { formatUtcDate } from '../../lib/DateUtils.js'
 
 var newMarkerId = 9999; //placeholder for report id when user clicks a new location on map
+let zoom = 14;
 
 export default class MapView extends React.Component {
 
@@ -90,7 +91,7 @@ export default class MapView extends React.Component {
         <Map
           tap={false} //needed for Safari browser
           center={this.props.position}
-          zoom={this.props.zoom}
+          zoom={zoom}
           style={{height: this.props.height + 'px'}}
           onClick={this.addMarker}
         >
