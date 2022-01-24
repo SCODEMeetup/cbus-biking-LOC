@@ -4,6 +4,7 @@ import { Map, TileLayer, Marker, Popup, CircleMarker } from 'react-leaflet';
 import { BIKING_REPORTS_URL } from '../../services/CbusBikingLocService.js';
 import { getReports } from '../../services/CbusBikingLocService.js';
 import { formatUtcDate } from '../../lib/DateUtils.js'
+import { isValidHttpUrl } from '../../lib/Utils.js'
 
 var newMarkerId = 9999; //placeholder for report id when user clicks a new location on map
 let zoom = 14;
@@ -129,7 +130,8 @@ export default class MapView extends React.Component {
                       <p>{formatUtcDate(report.incident_datetime)}</p>
                       <hr color="white"/>
                       <h3>Incident description</h3>
-                      <p>{report.incident_text}</p>
+                      {/* <p>{report.incident_text.startsWith('http') ? <a href={report.incident_text}>Crash Report Link</a> : report.incident_text}</p> */}
+                      <p>{isValidHttpUrl(report.incident_text) ? <a href={report.incident_text}>Crash Report Link</a> : report.incident_text}</p>
                     </div>
                    </div>
                 </Popup>
