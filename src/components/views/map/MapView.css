@@ -1,0 +1,44 @@
+
+.info-box {
+    background-color: #707070;
+    border: px;
+    color: gray;
+    border-style: solid;
+    border-color: lightgreen;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+  }
+  
+.content h2 {
+    font-size: 1.0rem;
+    text-align: left;
+    color: lightgreen;
+}
+
+
+.content h3 {
+    font-size: .75rem;
+    margin-bottom: 0;
+    padding-bottom: 2%;
+    padding-left: 2%;
+    color: white;
+}
+
+.content p {
+    text-align: left;
+    font-size: 0.65rem;
+    margin-top: 2px;
+    padding-left: 5%;
+    color: lightgreen;
+}
+
+.content hr {
+    color: white;
+}
+
+.content a:link {
+    color: yellow;
+}
